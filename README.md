@@ -1,7 +1,7 @@
 # shellscripts
 Starting a simple shellscript collection.
 
-### get_video
+### video_grabber
 Wrapper for youtube-dl (simplifies downloading videos)
 
 # Do whatever you want license
