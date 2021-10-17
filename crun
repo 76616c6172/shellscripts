@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# compiles the target with gcc and then runs it, similar to go run
+
+# if no argument provided: print usage and exit
+if test -z $1 ; then
+  echo "Usage:"
+  echo '  crun [filename]'
+  exit
+fi
+
+# Compile and and run the binary
+# gcc $1 -o "$1-ELF" && ./"$1-ELF"
+
+# Link cs50 library, then compile and run the binary
+gcc $1 -lcs50 -o "$1-ELF" && ./"$1-ELF"
