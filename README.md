@@ -1,6 +1,9 @@
 # shellscripts
 Starting a simple shellscript collection.
 
+### vpn_toggle
+Wrapper for wireguard, toggles the connection to through the wg0 interface
+
 ### video_grabber
 Wrapper for youtube-dl (simplifies downloading videos)
 
