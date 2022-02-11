@@ -3,7 +3,7 @@
 # Specify the wireguard endpoint we want to toggle
 # We need a corresponding wireguard client config
 # of the same name at /etc/wireguard/wgi.conf
-wgi="Gossifleur"
+wgi="Altaria"
 
 # Check if wgi is connected
 x=$(ip a | grep $wgi > /dev/null ; echo $?)
@@ -18,6 +18,6 @@ if [ "$x" = 1 ] ; then
 fi
  sudo wg-quick down $wgi
  echo " "
- echo "[#] nmcli d status"
+ echo "> nmcli d status:"
  nmcli d status
   exit
