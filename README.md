@@ -11,7 +11,10 @@ Wrapper for youtube-dl (simplifies downloading videos)
 Wrapper for youtube-dl (simplifies extracting audio from video sources)
 
 ### crun
-C version of "$ go run", to make experimenting with C more appealing (compiles target with gcc and then runs it).
+C version of go run command. Type `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
+
+### g
+Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
 
 # Do whatever you want license
 Software is provided without warranty and the software author/license owner cannot be held liable for damages.
