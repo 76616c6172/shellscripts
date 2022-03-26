@@ -20,7 +20,7 @@ Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
 Find wrapper, type `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden folders or files)
 
 ### cheat <cmd>
-Curls helpful usage examples about the command from cheat.sh
+Curl wrapper, type `cheat <command>` to curl helpful usage examples from cheat.sh
 
 # Do whatever you want license
 Software is provided without warranty and the software author/license owner cannot be held liable for damages.
