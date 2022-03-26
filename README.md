@@ -16,5 +16,8 @@ C version of go run command. Type `crun <filename>` instead of `gcc <filename> -
 ### g
 Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
 
+### cheat <cmd>
+Curls helpful usage examples about the command from cheat.sh
+
 # Do whatever you want license
 Software is provided without warranty and the software author/license owner cannot be held liable for damages.
