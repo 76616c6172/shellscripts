@@ -16,6 +16,9 @@ C version of go run command. Type `crun <filename>` instead of `gcc <filename> -
 ### g
 Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
 
+### f 
+Find wrapper, type `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden folders or files)
+
 ### cheat <cmd>
 Curls helpful usage examples about the command from cheat.sh
 
