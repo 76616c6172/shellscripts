@@ -2,7 +2,7 @@
 Starting a simple shellscript collection.
 
 ### vpn_toggle
-Wrapper for wireguard, toggles the connection to through the wg0 interface
+Wrapper for wireguard, toggles the connection of the wg0 interface
 
 ### video_grabber
 Wrapper for youtube-dl (simplifies downloading videos)
@@ -11,7 +11,7 @@ Wrapper for youtube-dl (simplifies downloading videos)
 Wrapper for youtube-dl (simplifies extracting audio from video sources)
 
 ### crun
-C version of go run command. Type `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
+C version of go run. Type `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
 
 ### g
 Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
