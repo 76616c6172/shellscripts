@@ -19,6 +19,14 @@ Go run wrapper, type `g <argument(s)>` instead of `go run <argument(s)>`
 ### f 
 Find wrapper, type `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden folders or files)
 
+### `sc` Search Code
+Find the repo -> open in vscode.
+
+A Script to quickly find and open a repo from a hard-coded folder,
+usage: `sc <partial repo name` -> `select number`.
+
+While coding I kept thinking to myself: "Hey I've done something like this in the past - how did I code that again?" -> * opens github to look for my repo * - This is insane since I have the repos locally and I would much rather open them in my editor than in the browser. The insanity ends now.
+
 ### cheat <cmd>
 Curl wrapper, type `cheat <command>` to curl helpful usage examples from cheat.sh
 
