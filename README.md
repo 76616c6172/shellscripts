@@ -11,7 +11,8 @@ C version of go run.
 Usage: `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
 
 ### f 
-Find wrapper, type `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden folders or files)
+Find wrapper that uses fzf in the current directory.  
+Usage: `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden files on purpose)
 
 ### ffd
 Fuzzy Find Directory  
