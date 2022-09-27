@@ -12,12 +12,12 @@ x=$(ip a | grep $wgi > /dev/null ; echo $?)
 if [ "$x" = 1 ] ; then
  sudo wg-quick up $wgi
  echo " "
- echo "[#] nmcli d status"
+ #echo "network interfac state:"
  nmcli d status
   exit
 fi
  sudo wg-quick down $wgi
  echo " "
- echo "> nmcli d status:"
+ #echo "network interface state:"
  nmcli d status
   exit
