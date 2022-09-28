@@ -10,13 +10,14 @@ Usage: `cheat <command>` to curl usage examples from cheat.sh
 C version of go run.  
 Usage: `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
 
-### f 
-Find wrapper that uses fzf in the current directory.  
-Usage: `f <filename>` to search recursively for partial filenames in the current directory (does not search hidden files on purpose)
-
 ### ffd
 Fuzzy Find Directory  
-FZF wrapper for interactively finding and cd-ing to a dir inside of my projects/*
+FZF wrapper for interactively finding and cd-ing to a dir inside of my projects/* folder
+
+### cdi
+Change Directoory interactively  
+Usage: `cdi` to search recursively for partial dirnames from ./** then  cd into them
+Requires shell alias `alias cdi='. cdi'`
 
 ### nms
 Network Manager Status  

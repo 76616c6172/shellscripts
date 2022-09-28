@@ -6,6 +6,7 @@
 # fzf (https://github.com/junegunn/fzf)
 #
 # alias ffd='. /home/valar/.shellscripts/ffd' # to run the script without a subshell
-
+#gum spin --title "Changing  directory interactively..." -- sleep 0.1
+#echo "changing dir interactively.."
 DIR=$(ls /home/valar/projects | fzf)
 cd /home/valar/projects/"$DIR"
