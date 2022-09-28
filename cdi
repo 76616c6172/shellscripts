@@ -7,6 +7,4 @@
 # fzf (https://github.com/junegunn/fzf)
 # alias cdi='. cdi' # to run the script without a subshell and let you cd
  
-
-DIR=$(find ** -type d -not -name '.*' | fzf)
-cd "$DIR"
+cd $(find -name "**" -type d -not -name '.*' | fzf)
