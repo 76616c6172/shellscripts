@@ -19,6 +19,22 @@ Change Directoory interactively
 Usage: `cdi` to search recursively for partial dirnames from ./** then  cd into them
 Requires shell alias `alias cdi='. cdi'`
 
+
+### nix-env_wrapper
+Combines best of both worlds (declarative + imperative).
+Thank you to https://gist.github.com/danbst
+
+depends on: nix-env package manager
+
+ Usage:
+ nix-env_wrapper install nixpkg.<package_name>
+ nix-env_wrapper uninstall nixpkg.<package_name>
+ nix-env_wrapper list
+
+ package configuration is saved in ~/.config/nixpkgs/declarative as a human readable list (as well as for use with this script)
+ and in ~/.config/nixpkgs/declarative-env.nix for easy portability and configuration on a new system!
+
+
 ### nms
 Network Manager Status  
 Scriptable alias for `nmcli device status`

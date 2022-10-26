@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# nix-env wrapper that combines best of both worlds declarative + imperative use of nix-env
+# thank you to https://gist.github.com/danbst
+#
+# Usage:
+# nix-env_wrapper install nixpkg.<package_name>
+# nix-env_wrapper uninstall nixpkg.<package_name>
+# nix-env_wrapper list
+#
+# package configuration is saved in ~/.config/nixpkgs/declarative as a human readable list (as well as for use with this script)
+# and in ~/.config/nixpkgs/declarative-env.nix for easy portability and configuration on a new system!
+
+statefile=~/.config/nixpkgs/declarative
+
+action="$1"
+package="$2"
+
+mkdir -p $(dirname "$statefile")
+touch "$statefile"
+
+
+function update {
+  envExpr=~/.config/nixpkgs/declarative-env.nix
+  truncate -s 0 "$envExpr"
+  for ch in $(ls /nix/var/nix/profiles/per-user/root/channels | grep -v -e manifest -e binary-caches) ; do
+    echo "let $ch = import <$ch> { }; in" >> "$envExpr"
+  done
+  echo "let _pkgs = import <nixpkgs> { }; in" >> "$envExpr"
+  echo "rec { _paths = [" >> "$envExpr"
+  cat "$statefile" | sort -u >> "$envExpr"
+  echo "             ]; " >> "$envExpr"
+  echo "      env = _pkgs.buildEnv {" >> "$envExpr"
+  echo "      name = ''declarative-collection''; " >> "$envExpr"
+  echo "      paths = _paths;" >> "$envExpr"
+  echo "}; }" >> "$envExpr"
+  \nix-env -Q -if "$envExpr" -A env && echo "# Updated successfully!" >> "$envExpr"
+  cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+}
+
+case "$action" in
+install|add)
+    if (grep -Eq "^$package\$" "$statefile"); then
+        echo "already installed, updating"
+    else
+        echo "scheduled install'n'update"
+        echo "$package" >> "$statefile"
+    fi
+    # TODO: trap
+    update && echo Success || sed -i "/^$package$/d" $statefile
+    cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+;;
+uninstall|remove|delete)
+    if (grep -Eq "^$package\$" "$statefile"); then
+        sed -i "/^$package\$/d" $statefile
+        update && echo "Success"
+        cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+    else
+        echo Not installed
+    fi
+;;
+list)
+    cat "$statefile"
+;;
+*)
+    echo Command not specified. Try $(basename "$0") install nixpkgs.htop
+    echo Command list: install, uninstall, list
+;;
+esac
