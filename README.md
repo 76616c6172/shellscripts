@@ -10,7 +10,7 @@ Usage: `cheat <command>` to curl usage examples from cheat.sh
 C version of go run.  
 Usage: `crun <filename>` instead of `gcc <filename> -o "filename-ELF" && ./"filename-ELF"`
 
-### ffd
+### fd
 Fuzzy Find Directory  
 FZF wrapper for interactively finding and cd-ing to a dir inside of my projects/* folder
 

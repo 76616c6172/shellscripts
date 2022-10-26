@@ -1,12 +1,13 @@
 #!/bin/bash
-# Fuzzy Find Directory
+# Find Directory
 # Interactively fuzzy find a dirname in my projects/* and then cd into it
 #
 # Depends on:
 # fzf (https://github.com/junegunn/fzf)
+# alias fd='. fd' # to run the script without a subshell
 #
-# alias ffd='. /home/valar/.shellscripts/ffd' # to run the script without a subshell
 #gum spin --title "Changing  directory interactively..." -- sleep 0.1
 #echo "changing dir interactively.."
-DIR=$(ls /home/valar/projects | fzf)
-cd /home/valar/projects/"$DIR"
+#DIR=$(ls /home/valar/projects | fzf)
+#cd /home/valar/projects/"$DIR"
+cd /home/valar/projects/"$(ls /home/valar/projects | fzf)"
