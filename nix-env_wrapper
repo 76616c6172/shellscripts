@@ -39,10 +39,14 @@ function update {
 
 case "$action" in
 install|add|i|-i)
-
+    pure_pkg_name="$package"
   # fast sanity check to make sure .nixpkgs is part of the package name
     if [[ "$package" != *"nixpkgs"* ]] ; then
-      echo "no such pkg, did you mean nixpkgs.$package ?"
+      echo "no such pkg, trying nixpkgs.$package"
+      package="nixpkgs.$package"
+    fi
+    # make sure the package exists, slow but important
+    if ! (nix-env -qa $pure_pkg_name) ; then
       exit 1
     fi
 
@@ -52,7 +56,8 @@ install|add|i|-i)
         echo "scheduled install & update"
         echo "$package" >> "$statefile"
     fi
-    # TODO: trap
+    
+    # TODO: trap?
     update && echo "success" || sed -i "/^$package$/d" $statefile
     cd /home/valar/.config/nixpkgs && git commit -a -m "add $package" &>0 && git push origin master &>0 
 ;;
@@ -69,8 +74,8 @@ list|l|-l)
     cat "$statefile"
 ;;
 *)
-    # if [[ action != "install" ]] && [[ action != 
-    nix-env $@
+  # otherwise use nix-env directly
+    nix-env '"$@"'
     #echo Command not specified. Try $(basename "$0") install nixpkgs.htop
     #echo Command list: install, uninstall, list
 ;;
