@@ -38,7 +38,7 @@ function update {
   echo "      paths = _paths;" >> "$envExpr"
   echo "}; }" >> "$envExpr"
   \nix-env -Q -if "$envExpr" -A env && echo "updated successfully!" >> "$envExpr"
-        cd /home/valar/.config/nixpkgs && git commit -a -m "update $package" &>0 && git push origin master &>0 
+        cd /home/valar/.config/nixpkgs && git commit -a -m "update $package" &>/dev/null && git push origin master &>/dev/null
 }
 
 case "$action" in
@@ -63,13 +63,13 @@ install|add|i|-i)
     
     # TODO: trap?
     update && echo "success" || sed -i "/^$package$/d" $statefile
-    cd /home/valar/.config/nixpkgs && git commit -a -m "add $package" &>0 && git push origin master &>0 
+    cd /home/valar/.config/nixpkgs && git commit -a -m "add $package" &>/dev/null && git push origin master &>/dev/null
 ;;
 uninstall|-e|e|remove|delete|del|rm|remove)
     if (grep -Eq "^$package\$" "$statefile"); then
         sed -i "/^$package\$/d" $statefile
         update && echo "success"
-        cd /home/valar/.config/nixpkgs && git commit -a -m "remove $package" &>0 && git push origin master &>0 
+        cd /home/valar/.config/nixpkgs && git commit -a -m "remove $package" &>/dev/null && git push origin master &>/dev/null 
     else
         echo "not installed"
     fi

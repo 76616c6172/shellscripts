@@ -20,8 +20,8 @@ Usage: `cdi` to search recursively for partial dirnames from ./** then  cd into 
 Requires shell alias `alias cdi='. cdi'`
 
 
-### nix-env_wrapper
-Combines best of both worlds (declarative + imperative).
+### nix-env-wrapper
+Combines best of both declarative and imperative package management.
 Thank you to https://gist.github.com/danbst
 
 depends on: nix-env package manager
