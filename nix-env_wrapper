@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # nix-env wrapper that combines best of both worlds declarative + imperative use of nix-env
 # thank you to https://gist.github.com/danbst
 #
@@ -33,36 +33,45 @@ function update {
   echo "      name = ''declarative-collection''; " >> "$envExpr"
   echo "      paths = _paths;" >> "$envExpr"
   echo "}; }" >> "$envExpr"
-  \nix-env -Q -if "$envExpr" -A env && echo "# Updated successfully!" >> "$envExpr"
-  cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+  \nix-env -Q -if "$envExpr" -A env && echo "updated successfully!" >> "$envExpr"
+        cd /home/valar/.config/nixpkgs && git commit -a -m "update $package" &>0 && git push origin master &>0 
 }
 
 case "$action" in
-install|add)
+install|add|i|-i)
+
+  # fast sanity check to make sure .nixpkgs is part of the package name
+    if [[ "$package" != *"nixpkgs"* ]] ; then
+      echo "no such pkg, did you mean nixpkgs.$package ?"
+      exit 1
+    fi
+
     if (grep -Eq "^$package\$" "$statefile"); then
         echo "already installed, updating"
     else
-        echo "scheduled install'n'update"
+        echo "scheduled install & update"
         echo "$package" >> "$statefile"
     fi
     # TODO: trap
-    update && echo Success || sed -i "/^$package$/d" $statefile
-    cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+    update && echo "success" || sed -i "/^$package$/d" $statefile
+    cd /home/valar/.config/nixpkgs && git commit -a -m "add $package" &>0 && git push origin master &>0 
 ;;
-uninstall|remove|delete)
+uninstall|-e|e|remove|delete|del|rm|remove)
     if (grep -Eq "^$package\$" "$statefile"); then
         sed -i "/^$package\$/d" $statefile
-        update && echo "Success"
-        cd /home/valar/.config/nixpkgs && git commit -a -m "$(date)"
+        update && echo "success"
+        cd /home/valar/.config/nixpkgs && git commit -a -m "remove $package" &>0 && git push origin master &>0 
     else
-        echo Not installed
+        echo "not installed"
     fi
 ;;
-list)
+list|l|-l)
     cat "$statefile"
 ;;
 *)
-    echo Command not specified. Try $(basename "$0") install nixpkgs.htop
-    echo Command list: install, uninstall, list
+    # if [[ action != "install" ]] && [[ action != 
+    nix-env $@
+    #echo Command not specified. Try $(basename "$0") install nixpkgs.htop
+    #echo Command list: install, uninstall, list
 ;;
 esac
