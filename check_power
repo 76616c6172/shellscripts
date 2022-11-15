@@ -1,0 +1,12 @@
+#!/bin/bash
+# Checks the battery level and notifies if it is under the threshhold
+while true ; do
+  THRESH=`expr 10`
+  BAT_LEVEL=$(cat /sys/class/power_supply/BAT0/capacity)
+  LEVEL=`expr $BAT_LEVEL`
+  
+  if [[ $LEVEL -le $THRESH ]] ; then
+    notify-send --urgency=critical --icon="ICON" "Low Battery" "level: `expr $LEVEL - 5`%"
+  fi
+  sleep 60
+done
